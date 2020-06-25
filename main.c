@@ -7,7 +7,9 @@
 Array *init_linked_list();
 void add_element_first(Array *array, int newNum);
 void print_linked_list(Array *array);
-void test_print_linked_list(Array *array);
+void add_element_end(Array *array, int NewNum);
+void delete_chained_list(Array *array);
+
 
 int main(){
 
@@ -20,7 +22,8 @@ int main(){
     add_element_first(linked_list, 7878);
     add_element_first(linked_list, 545);
     add_element_first(linked_list, 1);
-    test_print_linked_list(linked_list);
+    add_element_end(linked_list, 420);
+    print_linked_list(linked_list);
     
     return 0;
 }
@@ -59,40 +62,70 @@ void add_element_first(Array *array, int newNum){
 
 }
 
-void print_linked_list(Array *array){
-    Element *elem = 0;
-    Element *element;
-    element = array->first;
-    elem = element->next;
-    printf("%d ", element->num);
-    printf("-> ");
-    Element *nextaddr = element->next;
-    while(elem != NULL){    
-        elem = nextaddr->next;
-        printf("%d", nextaddr->num);
-        printf("-> ");
-           
-    }
-}
+void add_element_end(Array *array, int newNum){
+    Element *new = malloc(sizeof(*new));
 
-void test_print_linked_list(Array *array){
-    Element *element;
-    Element *nextelem;
-    element = array->first;
+    if(array == NULL || new == NULL){
+        exit(1);
+    }
     
+    Element *current = array->first;
     
-    while(element->next != NULL){
-        printf("-> ");    
-        element = nextelem->next;
-        printf("%d", nextelem->num);
-        if(element->next == NULL){break;}
-        printf("-> ");
+    while(current!= NULL){
         
-        nextelem = element->next;
-        printf("%d ", element->num);
-    
-    
+        current = current->next;
     }
+    
+    if(current->next == NULL){
+        current->next = new;  // Error comes from here 
+    }
+    new->num = newNum;
+    new->next = NULL;
 
 }
 
+
+
+void print_linked_list(Array *array){
+    
+
+    if(array == NULL){
+        exit(1);
+    }
+    
+    Element *current = array->first;
+    
+    while(current!= NULL){
+
+        printf("%d ->", current->num);
+        current = current->next;
+    }
+    printf("NULL\n");
+
+}
+
+
+void delete_chained_list(Array *array){
+
+}
+
+void delete_first_element(Array *array){
+
+}
+
+void delete_last_element(Array *array){
+
+}
+
+void delete_element(Array *array, int element){
+
+}
+
+void delete_value(Array *array, int value){
+    // delete a specified value
+    // for exemple if value = 4, it will delete every element which value = 4
+}
+
+void append_element(Array *array, int pos, int toAppend){
+
+}
